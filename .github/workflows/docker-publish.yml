@@ -27,7 +27,7 @@ jobs:
           NAME: whdgh # Dockerhub 아이디
           REPO: gitaction # dockerhub 의 레포지토리 이름
         run: |
-          docker build -t $REPO
+          docker build -t $REPO .
           docker tag $REPO:latest $NAME/$REPO:latest # 'REPO:latest' 를 가지고 태그 이름 설정
           docker push $NAME/%REPO:latest
 
