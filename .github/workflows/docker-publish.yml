@@ -1,4 +1,4 @@
-name: Docker
+name: action
 
 # '어떤 이벤트가 발생했을 때'를 의미
 # cron 이면 주기적인 작업
