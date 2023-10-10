@@ -7,7 +7,7 @@ import(
 
 func main(){
 	for{
-		fmt.Println("Go file")
+		fmt.Println("Go file(new)")
 		time.Sleep(10 * time.Second)
 	}
 }
