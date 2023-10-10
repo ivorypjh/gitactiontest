@@ -1,0 +1,37 @@
+name: Docker
+
+# '어떤 이벤트가 발생했을 때'를 의미
+# cron 이면 주기적인 작업
+on:
+  push:
+    branches: ["main"] # main 브랜치에 push 이벤트가 발생한 경우
+  pull_request: 
+    branches: ["main"] # main 브랜치에 pr 이벤트가 발생하면
+
+# 어떤 일을 수행할지
+jobs:
+  build:
+    runs-on: ubuntu-latest # ubuntu를 가져옴
+    steps:
+      - uses: actions/checkout@v3 # checkout 3 버전을 사용
+      - name: set up # 이름은 상관 없음
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.13 # go 버전 지정
+
+      - name: Build
+        run: go build -v ./... # 파이썬의 pip install 과 동일
+
+      - name: build and release to DockerHub
+        env:
+          NAME: whdgh # Dockerhub 아이디
+          REPO: gitaction # dockerhub 의 레포지토리 이름
+        run: |
+          docker build -t $REPO
+          docker tag $REPO:latest $NAME/$REPO:latest # 'REPO:latest' 를 가지고 태그 이름 설정
+          docker push $NAME/%REPO:latest
+
+
+
+
+          
