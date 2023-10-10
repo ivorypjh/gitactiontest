@@ -10,10 +10,14 @@ on:
 
 # 어떤 일을 수행할지
 jobs:
+
   build:
+  
     runs-on: ubuntu-latest # ubuntu를 가져옴
+    
     steps:
       - uses: actions/checkout@v3 # checkout 3 버전을 사용
+      
       - name: set up # 이름은 상관 없음
         uses: actions/setup-go@v3
         with:
