@@ -16,31 +16,31 @@ jobs:
     runs-on: ubuntu-latest # ubuntu를 가져옴
     
     steps:
-      - uses: actions/checkout@v3 # checkout 3 버전을 사용
+    - uses: actions/checkout@v3 # checkout 3 버전을 사용
       
-      - name: set up # 이름은 상관 없음
-        uses: actions/setup-go@v3
-        with:
-          go-version: 1.13 # go 버전 지정
+    - name: set up # 이름은 상관 없음
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.13 # go 버전 지정
 
-      - name: Build
-        run: go build -v ./... # 파이썬의 pip install 과 동일
+    - name: Build
+      run: go build -v ./... # 파이썬의 pip install 과 동일
 
         # dockerhub에 로그인 하는 부분
-      - name: Login To DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: whdgh
-          password: dckr_pat_q-XPq_puIP-xUxfAAn7-KlqvvNo
+    - name: Login To DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: whdgh
+        password: dckr_pat_q-XPq_puIP-xUxfAAn7-KlqvvNo
 
-      - name: build and release to DockerHub
-        env:
-          NAME: whdgh # Dockerhub 아이디
-          REPO: gitaction # dockerhub 의 레포지토리 이름
-        run: |
-          docker build -t $REPO .
-          docker tag $REPO:latest $NAME/$REPO:latest # 'REPO:latest' 를 가지고 태그 이름 설정
-          docker push $NAME/%REPO:latest
+    - name: build and release to DockerHub
+      env:
+        NAME: whdgh # Dockerhub 아이디
+        REPO: gitaction # dockerhub 의 레포지토리 이름
+      run: |
+        docker build -t $REPO .
+        docker tag $REPO:latest $NAME/$REPO:latest # 'REPO:latest' 를 가지고 태그 이름 설정
+        docker push $NAME/%REPO:latest
 
 
 
